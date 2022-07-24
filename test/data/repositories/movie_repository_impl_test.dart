@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/data/models/movie_model.dart';
+import 'package:ditonton/data/models/movie_overview_model.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
@@ -28,7 +28,7 @@ void main() {
     );
   });
 
-  final tMovieModel = MovieModel(
+  final tMovieModel = MovieOverviewModel(
     adult: false,
     backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
     genreIds: [14, 28],
@@ -62,7 +62,7 @@ void main() {
     voteCount: 13507,
   );
 
-  final tMovieModelList = <MovieModel>[tMovieModel];
+  final tMovieModelList = <MovieOverviewModel>[tMovieModel];
   final tMovieList = <Movie>[tMovie];
 
   group('Now Playing Movies', () {
@@ -190,7 +190,7 @@ void main() {
 
   group('Get Movie Detail', () {
     final tId = 1;
-    final tMovieResponse = MovieDetailResponse(
+    final tMovieResponse = MovieDetailModel(
       adult: false,
       backdropPath: 'backdropPath',
       budget: 100,
@@ -256,7 +256,7 @@ void main() {
   });
 
   group('Get Movie Recommendations', () {
-    final tMovieList = <MovieModel>[];
+    final tMovieList = <MovieOverviewModel>[];
     final tId = 1;
 
     test('should return data (movie list) when the call is successful',

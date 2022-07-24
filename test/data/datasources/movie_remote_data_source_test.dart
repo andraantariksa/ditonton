@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
-import 'package:ditonton/data/models/movie_response.dart';
+import 'package:ditonton/data/models/movies_overview_model.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +24,7 @@ void main() {
   });
 
   group('get Now Playing Movies', () {
-    final tMovieList = MovieResponse.fromJson(
+    final tMovieList = MoviesOverviewModel.fromJson(
             json.decode(readJson('dummy_data/now_playing.json')))
         .movieList;
 
@@ -57,7 +57,7 @@ void main() {
 
   group('get Popular Movies', () {
     final tMovieList =
-        MovieResponse.fromJson(json.decode(readJson('dummy_data/popular.json')))
+        MoviesOverviewModel.fromJson(json.decode(readJson('dummy_data/popular.json')))
             .movieList;
 
     test('should return list of movies when response is success (200)',
@@ -86,7 +86,7 @@ void main() {
   });
 
   group('get Top Rated Movies', () {
-    final tMovieList = MovieResponse.fromJson(
+    final tMovieList = MoviesOverviewModel.fromJson(
             json.decode(readJson('dummy_data/top_rated.json')))
         .movieList;
 
@@ -115,7 +115,7 @@ void main() {
 
   group('get movie detail', () {
     final tId = 1;
-    final tMovieDetail = MovieDetailResponse.fromJson(
+    final tMovieDetail = MovieDetailModel.fromJson(
         json.decode(readJson('dummy_data/movie_detail.json')));
 
     test('should return movie detail when the response code is 200', () async {
@@ -142,7 +142,7 @@ void main() {
   });
 
   group('get movie recommendations', () {
-    final tMovieList = MovieResponse.fromJson(
+    final tMovieList = MoviesOverviewModel.fromJson(
             json.decode(readJson('dummy_data/movie_recommendations.json')))
         .movieList;
     final tId = 1;
@@ -174,7 +174,7 @@ void main() {
   });
 
   group('search movies', () {
-    final tSearchResult = MovieResponse.fromJson(
+    final tSearchResult = MoviesOverviewModel.fromJson(
             json.decode(readJson('dummy_data/search_spiderman_movie.json')))
         .movieList;
     final tQuery = 'Spiderman';

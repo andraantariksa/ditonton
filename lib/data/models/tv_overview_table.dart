@@ -17,10 +17,10 @@ class TVOverviewTable extends Equatable {
 
   factory TVOverviewTable.fromEntity(TVDetail tv) => TVOverviewTable(
     id: tv.id,
-    title: tv.title,
-    posterPath: tv.posterPath,
-    overview: tv.overview,
-  );
+        title: tv.name,
+        posterPath: tv.posterPath,
+        overview: tv.overview,
+      );
 
   factory TVOverviewTable.fromMap(Map<String, dynamic> map) => TVOverviewTable(
     id: map['id'],

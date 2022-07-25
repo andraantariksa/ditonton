@@ -5,8 +5,8 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_movie_watchlist_status.dart';
-import 'package:ditonton/domain/usecases/remove_tv_watchlist.dart';
-import 'package:ditonton/domain/usecases/save_watchlist.dart';
+import 'package:ditonton/domain/usecases/remove_movie_watchlist.dart';
+import 'package:ditonton/domain/usecases/save_movie_watchlist.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -19,25 +19,25 @@ import 'movie_detail_notifier_test.mocks.dart';
   GetMovieDetail,
   GetMovieRecommendations,
   GetMovieWatchListStatus,
-  SaveWatchlist,
-  RemoveTVWatchlist,
+  SaveMovieWatchlist,
+  RemoveMovieWatchlist,
 ])
 void main() {
   late MovieDetailNotifier provider;
   late MockGetMovieDetail mockGetMovieDetail;
   late MockGetMovieRecommendations mockGetMovieRecommendations;
-  late MockGetWatchListStatus mockGetWatchlistStatus;
-  late MockSaveWatchlist mockSaveWatchlist;
-  late MockRemoveWatchlist mockRemoveWatchlist;
+  late MockGetMovieWatchListStatus mockGetWatchlistStatus;
+  late MockSaveMovieWatchlist mockSaveWatchlist;
+  late MockRemoveMovieWatchlist mockRemoveWatchlist;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetMovieDetail = MockGetMovieDetail();
     mockGetMovieRecommendations = MockGetMovieRecommendations();
-    mockGetWatchlistStatus = MockGetWatchListStatus();
-    mockSaveWatchlist = MockSaveWatchlist();
-    mockRemoveWatchlist = MockRemoveWatchlist();
+    mockGetWatchlistStatus = MockGetMovieWatchListStatus();
+    mockSaveWatchlist = MockSaveMovieWatchlist();
+    mockRemoveWatchlist = MockRemoveMovieWatchlist();
     provider = MovieDetailNotifier(
       getMovieDetail: mockGetMovieDetail,
       getMovieRecommendations: mockGetMovieRecommendations,

@@ -3,7 +3,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movies_popular_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -48,7 +48,7 @@ void main() {
     when(mockGetPopularMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
-    notifier.fetchPopularTVs();
+    notifier.fetchPopularMovies();
     // assert
     expect(notifier.state, RequestState.Loading);
     expect(listenerCallCount, 1);
@@ -59,10 +59,10 @@ void main() {
     when(mockGetPopularMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
-    await notifier.fetchPopularTVs();
+    await notifier.fetchPopularMovies();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.tvs, tMovieList);
+    expect(notifier.movies, tMovieList);
     expect(listenerCallCount, 2);
   });
 
@@ -71,7 +71,7 @@ void main() {
     when(mockGetPopularMovies.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
-    await notifier.fetchPopularTVs();
+    await notifier.fetchPopularMovies();
     // assert
     expect(notifier.state, RequestState.Error);
     expect(notifier.message, 'Server Failure');

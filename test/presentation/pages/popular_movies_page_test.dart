@@ -1,7 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movies_popular_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -12,10 +12,10 @@ import 'popular_movies_page_test.mocks.dart';
 
 @GenerateMocks([MoviesPopularNotifier])
 void main() {
-  late MockPopularMoviesNotifier mockNotifier;
+  late MockMoviesPopularNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockPopularMoviesNotifier();
+    mockNotifier = MockMoviesPopularNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {

@@ -1,7 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movies_top_rated_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,16 +10,16 @@ import 'package:provider/provider.dart';
 
 import 'top_rated_movies_page_test.mocks.dart';
 
-@GenerateMocks([TopRatedMoviesNotifier])
+@GenerateMocks([MoviesTopRatedNotifier])
 void main() {
-  late MockTopRatedMoviesNotifier mockNotifier;
+  late MockMoviesTopRatedNotifier mockNotifier;
 
   setUp(() {
-    mockNotifier = MockTopRatedMoviesNotifier();
+    mockNotifier = MockMoviesTopRatedNotifier();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TopRatedMoviesNotifier>.value(
+    return ChangeNotifierProvider<MoviesTopRatedNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,

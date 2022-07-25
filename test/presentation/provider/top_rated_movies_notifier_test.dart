@@ -3,7 +3,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movies_top_rated_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -13,13 +13,13 @@ import 'top_rated_movies_notifier_test.mocks.dart';
 @GenerateMocks([GetTopRatedMovies])
 void main() {
   late MockGetTopRatedMovies mockGetTopRatedMovies;
-  late TopRatedMoviesNotifier notifier;
+  late MoviesTopRatedNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetTopRatedMovies = MockGetTopRatedMovies();
-    notifier = TopRatedMoviesNotifier(getTopRated: mockGetTopRatedMovies)
+    notifier = MoviesTopRatedNotifier(getTopRatedMovies: mockGetTopRatedMovies)
       ..addListener(() {
         listenerCallCount++;
       });
@@ -48,7 +48,7 @@ void main() {
     when(mockGetTopRatedMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
-    notifier.fetchTopRatedTVs();
+    notifier.fetchTopRatedMovies();
     // assert
     expect(notifier.state, RequestState.Loading);
     expect(listenerCallCount, 1);
@@ -59,10 +59,10 @@ void main() {
     when(mockGetTopRatedMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
-    await notifier.fetchTopRatedTVs();
+    await notifier.fetchTopRatedMovies();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.tvs, tMovieList);
+    expect(notifier.movies, tMovieList);
     expect(listenerCallCount, 2);
   });
 
@@ -71,7 +71,7 @@ void main() {
     when(mockGetTopRatedMovies.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
-    await notifier.fetchTopRatedTVs();
+    await notifier.fetchTopRatedMovies();
     // assert
     expect(notifier.state, RequestState.Error);
     expect(notifier.message, 'Server Failure');

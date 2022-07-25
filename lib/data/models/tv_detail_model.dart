@@ -4,139 +4,113 @@ import 'package:equatable/equatable.dart';
 
 class TVDetailModel extends Equatable {
   TVDetailModel({
-    required this.adult,
     required this.backdropPath,
-    required this.budget,
     required this.genres,
     required this.homepage,
     required this.id,
     required this.imdbId,
     required this.originalLanguage,
-    required this.originalTitle,
+    required this.originalName,
     required this.overview,
     required this.popularity,
     required this.posterPath,
-    required this.releaseDate,
-    required this.revenue,
-    required this.runtime,
+    required this.firstAirDate,
     required this.status,
     required this.tagline,
-    required this.title,
-    required this.video,
+    required this.name,
     required this.voteAverage,
     required this.voteCount,
   });
 
-  final bool adult;
   final String? backdropPath;
-  final int budget;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
   final String? imdbId;
   final String originalLanguage;
-  final String originalTitle;
+  final String originalName;
   final String overview;
   final double popularity;
   final String posterPath;
-  final String releaseDate;
-  final int revenue;
-  final int runtime;
+  final String firstAirDate;
   final String status;
   final String tagline;
-  final String title;
-  final bool video;
+  final String name;
   final double voteAverage;
   final int voteCount;
 
-  factory TVDetailModel.fromJson(Map<String, dynamic> json) =>
-      TVDetailModel(
-        adult: json["adult"],
+  factory TVDetailModel.fromJson(Map<String, dynamic> json) => TVDetailModel(
         backdropPath: json["backdrop_path"],
-        budget: json["budget"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         imdbId: json["imdb_id"],
         originalLanguage: json["original_language"],
-        originalTitle: json["original_title"],
+        originalName: json["original_name"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
         posterPath: json["poster_path"],
-        releaseDate: json["release_date"],
-        revenue: json["revenue"],
-        runtime: json["runtime"],
+        firstAirDate: json["first_air_date"],
         status: json["status"],
         tagline: json["tagline"],
-        title: json["title"],
-        video: json["video"],
+        name: json["name"],
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "adult": adult,
+  Map<String, dynamic> toJson() =>
+      {
         "backdrop_path": backdropPath,
-        "budget": budget,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
         "imdb_id": imdbId,
         "original_language": originalLanguage,
-        "original_title": originalTitle,
+        "original_name": originalName,
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "release_date": releaseDate,
-        "revenue": revenue,
-        "runtime": runtime,
+        "first_air_date": firstAirDate,
         "status": status,
         "tagline": tagline,
-        "title": title,
-        "video": video,
+        "title": name,
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
 
   TVDetail toEntity() {
     return TVDetail(
-      adult: this.adult,
       backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
       id: this.id,
-      originalTitle: this.originalTitle,
+      originalName: this.originalName,
       overview: this.overview,
       posterPath: this.posterPath,
-      releaseDate: this.releaseDate,
-      runtime: this.runtime,
-      title: this.title,
+      firstAirDate: this.firstAirDate,
+      name: this.name,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
     );
   }
 
   @override
-  List<Object?> get props => [
-        adult,
+  List<Object?> get props =>
+      [
         backdropPath,
-        budget,
         genres,
         homepage,
         id,
         imdbId,
         originalLanguage,
-        originalTitle,
+        originalName,
         overview,
         popularity,
         posterPath,
-        releaseDate,
-        revenue,
-        runtime,
+        firstAirDate,
         status,
         tagline,
-        title,
-        video,
+        name,
         voteAverage,
         voteCount,
       ];

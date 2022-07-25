@@ -80,7 +80,7 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, List<Movie>>> searchMovies(String query) async {
+  Future<Either<Failure, List<Movie>>> search(String query) async {
     try {
       final result = await remoteDataSource.searchMovies(query);
       return Right(result.map((model) => model.toEntity()).toList());

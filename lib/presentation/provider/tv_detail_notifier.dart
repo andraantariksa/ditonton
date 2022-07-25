@@ -13,25 +13,25 @@ class TVDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  final GetTVDetail getMovieDetail;
-  final GetTVRecommendations getMovieRecommendations;
-  final GetTVWatchListStatus getWatchListStatus;
-  final SaveTVWatchlist saveWatchlist;
-  final RemoveTVWatchlist removeWatchlist;
+  final GetTVDetail getTVDetail;
+  final GetTVRecommendations getTVRecommendations;
+  final GetTVWatchListStatus getTVWatchListStatus;
+  final SaveTVWatchlist saveTVWatchlist;
+  final RemoveTVWatchlist removeTVWatchlist;
 
   TVDetailNotifier({
-    required this.getMovieDetail,
-    required this.getMovieRecommendations,
-    required this.getWatchListStatus,
-    required this.saveWatchlist,
-    required this.removeWatchlist,
+    required this.getTVDetail,
+    required this.getTVRecommendations,
+    required this.getTVWatchListStatus,
+    required this.saveTVWatchlist,
+    required this.removeTVWatchlist,
   });
 
   late TVDetail _tv;
   TVDetail get movie => _tv;
 
-  RequestState _movieState = RequestState.Empty;
-  RequestState get movieState => _movieState;
+  RequestState _tvState = RequestState.Empty;
+  RequestState get tvState => _tvState;
 
   List<TV> _tvRecommendations = [];
   List<TV> get tvRecommendations => _tvRecommendations;
@@ -42,17 +42,17 @@ class TVDetailNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  bool _isAddedtoWatchlist = false;
-  bool get isAddedToWatchlist => _isAddedtoWatchlist;
+  bool _isAddedToWatchlist = false;
+  bool get isAddedToWatchlist => _isAddedToWatchlist;
 
-  Future<void> fetchMovieDetail(int id) async {
-    _movieState = RequestState.Loading;
+  Future<void> fetchDetail(int id) async {
+    _tvState = RequestState.Loading;
     notifyListeners();
-    final detailResult = await getMovieDetail.execute(id);
-    final recommendationResult = await getMovieRecommendations.execute(id);
+    final detailResult = await getTVDetail.execute(id);
+    final recommendationResult = await getTVRecommendations.execute(id);
     detailResult.fold(
       (failure) {
-        _movieState = RequestState.Error;
+        _tvState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
@@ -70,7 +70,7 @@ class TVDetailNotifier extends ChangeNotifier {
             _tvRecommendations = tvs;
           },
         );
-        _movieState = RequestState.Loaded;
+        _tvState = RequestState.Loaded;
         notifyListeners();
       },
     );
@@ -80,7 +80,7 @@ class TVDetailNotifier extends ChangeNotifier {
   String get watchlistMessage => _watchlistMessage;
 
   Future<void> addWatchlist(TVDetail tv) async {
-    final result = await saveWatchlist.execute(tv);
+    final result = await saveTVWatchlist.execute(tv);
 
     await result.fold(
       (failure) async {
@@ -95,7 +95,7 @@ class TVDetailNotifier extends ChangeNotifier {
   }
 
   Future<void> removeFromWatchlist(TVDetail tv) async {
-    final result = await removeWatchlist.execute(tv);
+    final result = await removeTVWatchlist.execute(tv);
 
     await result.fold(
       (failure) async {
@@ -110,8 +110,8 @@ class TVDetailNotifier extends ChangeNotifier {
   }
 
   Future<void> loadWatchlistStatus(int id) async {
-    final result = await getWatchListStatus.execute(id);
-    _isAddedtoWatchlist = result;
+    final result = await getTVWatchListStatus.execute(id);
+    _isAddedToWatchlist = result;
     notifyListeners();
   }
 }

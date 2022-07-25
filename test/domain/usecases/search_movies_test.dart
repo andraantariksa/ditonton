@@ -18,9 +18,9 @@ void main() {
   final tMovies = <Movie>[];
   final tQuery = 'Spiderman';
 
-  test('should get list of movies from the repository', () async {
+  test('should get resulted search of `$tQuery` movies search from the repository', () async {
     // arrange
-    when(mockMovieRepository.searchMovies(tQuery))
+    when(mockMovieRepository.search(tQuery))
         .thenAnswer((_) async => Right(tMovies));
     // act
     final result = await usecase.execute(tQuery);

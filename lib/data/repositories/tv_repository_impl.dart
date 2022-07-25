@@ -20,7 +20,7 @@ class TVRepositoryImpl implements TVRepository {
   });
 
   @override
-  Future<Either<Failure, List<TV>>> getNowPlaying() async {
+  Future<Either<Failure, List<TV>>> getOnTheAir() async {
     try {
       final result = await remoteDataSource.getOnTheAirTVs();
       return Right(result.map((model) => model.toEntity()).toList());

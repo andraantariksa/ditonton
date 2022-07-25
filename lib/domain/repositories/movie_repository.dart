@@ -9,7 +9,7 @@ abstract class MovieRepository {
   Future<Either<Failure, List<Movie>>> getTopRated();
   Future<Either<Failure, MovieDetail>> getDetail(int id);
   Future<Either<Failure, List<Movie>>> getRecommendations(int id);
-  Future<Either<Failure, List<Movie>>> searchMovies(String query);
+  Future<Either<Failure, List<Movie>>> search(String query);
   Future<Either<Failure, String>> saveWatchlist(MovieDetail movie);
   Future<Either<Failure, String>> removeWatchlist(MovieDetail movie);
   Future<bool> isAddedToWatchlist(int id);

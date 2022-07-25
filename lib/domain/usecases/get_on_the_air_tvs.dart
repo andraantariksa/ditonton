@@ -9,6 +9,6 @@ class GetOnTheAirTVs {
   GetOnTheAirTVs(this.repository);
 
   Future<Either<Failure, List<TV>>> execute() {
-    return repository.getNowPlaying();
+    return repository.getOnTheAir();
   }
 }

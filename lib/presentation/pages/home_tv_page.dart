@@ -21,7 +21,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
   void initState() {
     super.initState();
     Future.microtask(() => Provider.of<TVListNotifier>(context, listen: false)
-      ..fetchNowPlayingTVs()
+      ..fetchOnTheAirTVs()
       ..fetchPopularTVs()
       ..fetchTopRatedTVs());
   }

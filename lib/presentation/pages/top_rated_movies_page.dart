@@ -1,5 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movies_top_rated_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TopRatedMoviesNotifier>(context, listen: false)
+        Provider.of<MoviesTopRatedNotifier>(context, listen: false)
             .fetchTopRatedMovies());
   }
 
@@ -28,7 +28,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedMoviesNotifier>(
+        child: Consumer<MoviesTopRatedNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return Center(

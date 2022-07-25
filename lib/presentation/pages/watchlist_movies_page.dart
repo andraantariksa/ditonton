@@ -1,6 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:ditonton/presentation/provider/movie_watchlist_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
+        Provider.of<MovieWatchlistNotifier>(context, listen: false)
             .fetchWatchlistMovies());
   }
 
@@ -29,7 +29,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
+    Provider.of<MovieWatchlistNotifier>(context, listen: false)
         .fetchWatchlistMovies();
   }
 
@@ -41,7 +41,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
+        child: Consumer<MovieWatchlistNotifier>(
           builder: (context, data, child) {
             if (data.watchlistState == RequestState.Loading) {
               return Center(

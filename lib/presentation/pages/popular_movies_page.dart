@@ -1,5 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/movies_popular_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<PopularMoviesNotifier>(context, listen: false)
+        Provider.of<MoviesPopularNotifier>(context, listen: false)
             .fetchPopularMovies());
   }
 
@@ -28,7 +28,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularMoviesNotifier>(
+        child: Consumer<MoviesPopularNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return Center(

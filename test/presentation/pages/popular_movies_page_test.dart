@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import 'popular_movies_page_test.mocks.dart';
 
-@GenerateMocks([PopularMoviesNotifier])
+@GenerateMocks([MoviesPopularNotifier])
 void main() {
   late MockPopularMoviesNotifier mockNotifier;
 
@@ -19,7 +19,7 @@ void main() {
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<PopularMoviesNotifier>.value(
+    return ChangeNotifierProvider<MoviesPopularNotifier>.value(
       value: mockNotifier,
       child: MaterialApp(
         home: body,

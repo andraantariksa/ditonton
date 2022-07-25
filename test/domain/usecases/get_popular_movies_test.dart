@@ -23,7 +23,7 @@ void main() {
           'should get list of movies from the repository when execute function is called',
           () async {
         // arrange
-        when(mockMovieRpository.getPopularMovies())
+        when(mockMovieRpository.getPopular())
             .thenAnswer((_) async => Right(tMovies));
         // act
         final result = await usecase.execute();

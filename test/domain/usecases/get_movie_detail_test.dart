@@ -19,7 +19,7 @@ void main() {
 
   test('should get movie detail from the repository', () async {
     // arrange
-    when(mockMovieRepository.getMovieDetail(tId))
+    when(mockMovieRepository.getDetail(tId))
         .thenAnswer((_) async => Right(testMovieDetail));
     // act
     final result = await usecase.execute(tId);

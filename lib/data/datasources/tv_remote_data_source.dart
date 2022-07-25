@@ -8,12 +8,12 @@ import 'package:ditonton/data/models/tvs_overview_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TVRemoteDataSource {
-  Future<List<TVOverviewModel>> getOnTheAirTV();
-  Future<List<TVOverviewModel>> getPopularTV();
-  Future<List<TVOverviewModel>> getTopRatedMovies();
+  Future<List<TVOverviewModel>> getOnTheAirTVs();
+  Future<List<TVOverviewModel>> getPopularTVs();
+  Future<List<TVOverviewModel>> getTopRatedTVs();
   Future<TVDetailModel> getTVDetail(int id);
   Future<List<TVOverviewModel>> getTVRecommendations(int id);
-  Future<List<TVOverviewModel>> searchTV(String query);
+  Future<List<TVOverviewModel>> searchTVs(String query);
 }
 
 class TVRemoteDataSourceImpl implements TVRemoteDataSource {
@@ -22,7 +22,7 @@ class TVRemoteDataSourceImpl implements TVRemoteDataSource {
   TVRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<TVOverviewModel>> getOnTheAirTV() async {
+  Future<List<TVOverviewModel>> getOnTheAirTVs() async {
     final response =
         await client.get(Uri.parse('${TheMovieDBService.BASE_URL}/tv/on_the_air?${TheMovieDBService.API_KEY}'));
 
@@ -34,7 +34,7 @@ class TVRemoteDataSourceImpl implements TVRemoteDataSource {
   }
 
   @override
-  Future<List<TVOverviewModel>> getPopularTV() async {
+  Future<List<TVOverviewModel>> getPopularTVs() async {
     final response =
         await client.get(Uri.parse('${TheMovieDBService.BASE_URL}/tv/popular?${TheMovieDBService.API_KEY}'));
 
@@ -48,7 +48,7 @@ class TVRemoteDataSourceImpl implements TVRemoteDataSource {
   @override
   Future<TVDetailModel> getTVDetail(int id) async {
     final response =
-        await client.get(Uri.parse('${TheMovieDBService.BASE_URL}/movie/$id?${TheMovieDBService.API_KEY}'));
+        await client.get(Uri.parse('${TheMovieDBService.BASE_URL}/tv/$id?${TheMovieDBService.API_KEY}'));
 
     if (response.statusCode == 200) {
       return TVDetailModel.fromJson(json.decode(response.body));
@@ -70,9 +70,9 @@ class TVRemoteDataSourceImpl implements TVRemoteDataSource {
   }
 
   @override
-  Future<List<TVOverviewModel>> getTopRatedMovies() async {
+  Future<List<TVOverviewModel>> getTopRatedTVs() async {
     final response =
-    await client.get(Uri.parse('${TheMovieDBService.BASE_URL}/movie/top_rated?${TheMovieDBService.API_KEY}'));
+    await client.get(Uri.parse('${TheMovieDBService.BASE_URL}/tv/top_rated?${TheMovieDBService.API_KEY}'));
 
     if (response.statusCode == 200) {
       return TVsOverviewModel.fromJson(json.decode(response.body)).tvList;
@@ -82,7 +82,7 @@ class TVRemoteDataSourceImpl implements TVRemoteDataSource {
   }
 
   @override
-  Future<List<TVOverviewModel>> searchTV(String query) async {
+  Future<List<TVOverviewModel>> searchTVs(String query) async {
     final response = await client
         .get(Uri.parse('${TheMovieDBService.BASE_URL}/search/tv?${TheMovieDBService.API_KEY}&query=$query'));
 

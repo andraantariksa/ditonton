@@ -40,7 +40,7 @@ class TVOverviewTable extends Equatable {
     id: id,
     overview: overview,
     posterPath: posterPath,
-    title: title,
+    name: title,
   );
 
   @override

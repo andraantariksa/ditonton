@@ -9,6 +9,6 @@ class GetTopRatedMovies {
   GetTopRatedMovies(this.repository);
 
   Future<Either<Failure, List<Movie>>> execute() {
-    return repository.getTopRatedMovies();
+    return repository.getTopRated();
   }
 }

@@ -13,13 +13,13 @@ import 'popular_movies_notifier_test.mocks.dart';
 @GenerateMocks([GetPopularMovies])
 void main() {
   late MockGetPopularMovies mockGetPopularMovies;
-  late PopularMoviesNotifier notifier;
+  late MoviesPopularNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetPopularMovies = MockGetPopularMovies();
-    notifier = PopularMoviesNotifier(mockGetPopularMovies)
+    notifier = MoviesPopularNotifier(mockGetPopularMovies)
       ..addListener(() {
         listenerCallCount++;
       });
@@ -48,7 +48,7 @@ void main() {
     when(mockGetPopularMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
-    notifier.fetchPopularMovies();
+    notifier.fetchPopularTVs();
     // assert
     expect(notifier.state, RequestState.Loading);
     expect(listenerCallCount, 1);
@@ -59,10 +59,10 @@ void main() {
     when(mockGetPopularMovies.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
-    await notifier.fetchPopularMovies();
+    await notifier.fetchPopularTVs();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.movies, tMovieList);
+    expect(notifier.tvs, tMovieList);
     expect(listenerCallCount, 2);
   });
 
@@ -71,7 +71,7 @@ void main() {
     when(mockGetPopularMovies.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
-    await notifier.fetchPopularMovies();
+    await notifier.fetchPopularTVs();
     // assert
     expect(notifier.state, RequestState.Error);
     expect(notifier.message, 'Server Failure');

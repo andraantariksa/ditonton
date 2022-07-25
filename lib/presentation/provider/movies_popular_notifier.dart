@@ -3,10 +3,10 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:flutter/foundation.dart';
 
-class PopularMoviesNotifier extends ChangeNotifier {
+class MoviesPopularNotifier extends ChangeNotifier {
   final GetPopularMovies getPopularMovies;
 
-  PopularMoviesNotifier(this.getPopularMovies);
+  MoviesPopularNotifier(this.getPopularMovies);
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;

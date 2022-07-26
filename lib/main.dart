@@ -25,6 +25,8 @@ import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_watchlist_notifier.dart';
 import 'package:ditonton/presentation/provider/tvs_popular_notifier.dart';
 import 'package:ditonton/presentation/provider/tvs_top_rated_notifier.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,16 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp();
+  FirebaseAnalytics.instance;
   await di.init();
+  await FirebaseAnalytics.instance.logBeginCheckout(
+      value: 10.0,
+      currency: 'USD',
+      items: [
+        AnalyticsEventItem(itemName: 'Socks', itemId: 'xjw73ndnw', price: 10.0),
+      ],
+      coupon: '10PERCENTOFF');
 
   runApp(MyApp());
 }

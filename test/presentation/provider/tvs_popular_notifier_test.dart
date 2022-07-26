@@ -43,10 +43,9 @@ void main() {
 
   test('should change state to loading when usecase is called', () async {
     // arrange
-    when(mockGetPopularTVs.execute())
-        .thenAnswer((_) async => Right(tTVList));
+    when(mockGetPopularTVs.execute()).thenAnswer((_) async => Right(tTVList));
     // act
-    notifier.fetchPopularMovies();
+    notifier.fetchPopularTVs();
     // assert
     expect(notifier.state, RequestState.Loading);
     expect(listenerCallCount, 1);
@@ -54,13 +53,12 @@ void main() {
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetPopularTVs.execute())
-        .thenAnswer((_) async => Right(tTVList));
+    when(mockGetPopularTVs.execute()).thenAnswer((_) async => Right(tTVList));
     // act
-    await notifier.fetchPopularMovies();
+    await notifier.fetchPopularTVs();
     // assert
     expect(notifier.state, RequestState.Loaded);
-    expect(notifier.movies, tTVList);
+    expect(notifier.tvs, tTVList);
     expect(listenerCallCount, 2);
   });
 
@@ -69,7 +67,7 @@ void main() {
     when(mockGetPopularTVs.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
-    await notifier.fetchPopularMovies();
+    await notifier.fetchPopularTVs();
     // assert
     expect(notifier.state, RequestState.Error);
     expect(notifier.message, 'Server Failure');

@@ -34,7 +34,7 @@ void main() {
     await provider.fetchWatchlistTVs();
     // assert
     expect(provider.watchlistState, RequestState.Loaded);
-    expect(provider.watchlistMovies, [testWatchlistTV]);
+    expect(provider.watchlistTVs, [testWatchlistTV]);
     expect(listenerCallCount, 2);
   });
 

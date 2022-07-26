@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class TVWatchlistNotifier extends ChangeNotifier {
   var _watchlistTVs = <TV>[];
-  List<TV> get watchlistMovies => _watchlistTVs;
+  List<TV> get watchlistTVs => _watchlistTVs;
 
   var _watchlistState = RequestState.Empty;
   RequestState get watchlistState => _watchlistState;

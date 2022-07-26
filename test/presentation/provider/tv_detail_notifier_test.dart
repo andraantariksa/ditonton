@@ -78,7 +78,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       verify(mockGetTVDetail.execute(tId));
       verify(mockGetTVRecommendations.execute(tId));
@@ -88,7 +88,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      provider.fetchDetail(tId);
+      provider.fetchTVDetail(tId);
       // assert
       expect(provider.tvState, RequestState.Loading);
       expect(listenerCallCount, 1);
@@ -98,19 +98,19 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       expect(provider.tvState, RequestState.Loaded);
-      expect(provider.movie, testTVDetail);
+      expect(provider.tv, testTVDetail);
       expect(listenerCallCount, 3);
     });
 
     test('should change recommendation movies when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+          _arrangeUsecase();
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       expect(provider.tvState, RequestState.Loaded);
       expect(provider.tvRecommendations, tTVs);
@@ -122,7 +122,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       verify(mockGetTVRecommendations.execute(tId));
       expect(provider.tvRecommendations, tTVs);
@@ -131,9 +131,9 @@ void main() {
     test('should update recommendation state when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+          _arrangeUsecase();
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       expect(provider.recommendationState, RequestState.Loaded);
       expect(provider.tvRecommendations, tTVs);
@@ -146,7 +146,7 @@ void main() {
       when(mockGetTVRecommendations.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       expect(provider.recommendationState, RequestState.Error);
       expect(provider.message, 'Failed');
@@ -224,7 +224,7 @@ void main() {
       when(mockGetTVRecommendations.execute(tId))
           .thenAnswer((_) async => Right(tTVs));
       // act
-      await provider.fetchDetail(tId);
+      await provider.fetchTVDetail(tId);
       // assert
       expect(provider.tvState, RequestState.Error);
       expect(provider.message, 'Server Failure');

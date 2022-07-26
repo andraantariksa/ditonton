@@ -19,7 +19,7 @@ class TVListNotifier extends ChangeNotifier {
   RequestState get popularTVsState => _popularTVsState;
 
   var _topRatedTVs = <TV>[];
-  List<TV> get topRatedMovies => _topRatedTVs;
+  List<TV> get topRatedTVs => _topRatedTVs;
 
   RequestState _topRatedTVsState = RequestState.Empty;
   RequestState get topRatedTVsState => _topRatedTVsState;

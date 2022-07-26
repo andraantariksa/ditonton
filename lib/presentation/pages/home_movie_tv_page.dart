@@ -1,8 +1,10 @@
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/movie_search_page.dart';
+import 'package:ditonton/presentation/pages/movie_watchlist_page.dart';
+import 'package:ditonton/presentation/pages/tv_search_page.dart';
+import 'package:ditonton/presentation/pages/tv_watchlist_page.dart';
 import 'package:ditonton/presentation/widgets/plain_page_route.dart';
 import 'package:flutter/material.dart';
 
@@ -37,21 +39,30 @@ class _HomeMovieTVPageState extends State<HomeMovieTVPage> {
                 leading: Icon(Icons.movie),
                 title: Text('Movies'),
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(context, '${HomeMovieTVPage.ROUTE_NAME}movie', (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      '${HomeMovieTVPage.ROUTE_NAME}movie', (route) => false);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.save_alt),
+                title: Text('Movies Watchlist'),
+                onTap: () {
+                  Navigator.pushNamed(context, MovieWatchlistPage.ROUTE_NAME);
                 },
               ),
               ListTile(
                 leading: Icon(Icons.movie),
                 title: Text('TV'),
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(context, '${HomeMovieTVPage.ROUTE_NAME}tv', (route) => false);
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      '${HomeMovieTVPage.ROUTE_NAME}tv', (route) => false);
                 },
               ),
               ListTile(
                 leading: Icon(Icons.save_alt),
-                title: Text('Watchlist'),
+                title: Text('TVs Watchlist'),
                 onTap: () {
-                  Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+                  Navigator.pushNamed(context, TVWatchlistPage.ROUTE_NAME);
                 },
               ),
               ListTile(
@@ -69,7 +80,16 @@ class _HomeMovieTVPageState extends State<HomeMovieTVPage> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+                switch (widget.pageRoute) {
+                  case HomeMoviePage.ROUTE_NAME:
+                    Navigator.pushNamed(context, MovieSearchPage.ROUTE_NAME);
+                    break;
+                  case HomeTVPage.ROUTE_NAME:
+                    Navigator.pushNamed(context, TVSearchPage.ROUTE_NAME);
+                    break;
+                  default:
+                    return null;
+                }
               },
               icon: Icon(Icons.search),
             )

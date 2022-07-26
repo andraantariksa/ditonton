@@ -40,7 +40,8 @@ class DatabaseHelper {
         overview TEXT,
         posterPath TEXT
       );
-      
+    ''');
+    await db.execute('''
       CREATE TABLE  $_tblTVWatchlist (
         id INTEGER PRIMARY KEY,
         title TEXT,
@@ -81,7 +82,7 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getWatchlistTVs() async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblMovieWatchlist);
+    final List<Map<String, dynamic>> results = await db!.query(_tblTVWatchlist);
 
     return results;
   }

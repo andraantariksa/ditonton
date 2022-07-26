@@ -157,7 +157,7 @@ void main() {
       await provider.fetchTopRatedTVs();
       // assert
       expect(provider.topRatedTVsState, RequestState.Loaded);
-      expect(provider.topRatedMovies, tTVList);
+      expect(provider.topRatedTVs, tTVList);
       expect(listenerCallCount, 2);
     });
 

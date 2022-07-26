@@ -12,12 +12,12 @@ class TVsPopularNotifier extends ChangeNotifier {
   RequestState get state => _state;
 
   List<TV> _tvs = [];
-  List<TV> get movies => _tvs;
+  List<TV> get tvs => _tvs;
 
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchPopularMovies() async {
+  Future<void> fetchPopularTVs() async {
     _state = RequestState.Loading;
     notifyListeners();
 

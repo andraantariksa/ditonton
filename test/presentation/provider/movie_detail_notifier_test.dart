@@ -26,18 +26,18 @@ void main() {
   late MovieDetailNotifier provider;
   late MockGetMovieDetail mockGetMovieDetail;
   late MockGetMovieRecommendations mockGetMovieRecommendations;
-  late MockGetMovieWatchListStatus mockGetWatchlistStatus;
-  late MockSaveMovieWatchlist mockSaveWatchlist;
-  late MockRemoveMovieWatchlist mockRemoveWatchlist;
+  late MockIsMovieWatchListed mockGetWatchlistStatus;
+  late MockSaveMovieWatchList mockSaveWatchlist;
+  late MockRemoveMovieWatchList mockRemoveWatchlist;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetMovieDetail = MockGetMovieDetail();
     mockGetMovieRecommendations = MockGetMovieRecommendations();
-    mockGetWatchlistStatus = MockGetMovieWatchListStatus();
-    mockSaveWatchlist = MockSaveMovieWatchlist();
-    mockRemoveWatchlist = MockRemoveMovieWatchlist();
+    mockGetWatchlistStatus = MockIsMovieWatchListed();
+    mockSaveWatchlist = MockSaveMovieWatchList();
+    mockRemoveWatchlist = MockRemoveMovieWatchList();
     provider = MovieDetailNotifier(
       getMovieDetail: mockGetMovieDetail,
       getMovieRecommendations: mockGetMovieRecommendations,

@@ -13,12 +13,12 @@ import 'movie_watchlist_notifier_test.mocks.dart';
 @GenerateMocks([GetMovieWatchList])
 void main() {
   late MovieWatchlistNotifier provider;
-  late MockGetMovieWatchlist mockGetWatchlistMovies;
+  late MockGetMovieWatchList mockGetWatchlistMovies;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockGetWatchlistMovies = MockGetMovieWatchlist();
+    mockGetWatchlistMovies = MockGetMovieWatchList();
     provider = MovieWatchlistNotifier(
       getWatchlistMovies: mockGetWatchlistMovies,
     )..addListener(() {

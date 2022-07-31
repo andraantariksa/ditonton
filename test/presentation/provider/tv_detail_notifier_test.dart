@@ -26,18 +26,18 @@ void main() {
   late TVDetailNotifier provider;
   late MockGetTVDetail mockGetTVDetail;
   late MockGetTVRecommendations mockGetTVRecommendations;
-  late MockGetTVWatchListStatus mockGetTVWatchlistStatus;
-  late MockSaveTVWatchlist mockSaveTVWatchlist;
-  late MockRemoveTVWatchlist mockRemoveTVWatchlist;
+  late MockIsTVWatchListed mockGetTVWatchlistStatus;
+  late MockSaveTVWatchList mockSaveTVWatchlist;
+  late MockRemoveTVWatchList mockRemoveTVWatchlist;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetTVDetail = MockGetTVDetail();
     mockGetTVRecommendations = MockGetTVRecommendations();
-    mockGetTVWatchlistStatus = MockGetTVWatchListStatus();
-    mockSaveTVWatchlist = MockSaveTVWatchlist();
-    mockRemoveTVWatchlist = MockRemoveTVWatchlist();
+    mockGetTVWatchlistStatus = MockIsTVWatchListed();
+    mockSaveTVWatchlist = MockSaveTVWatchList();
+    mockRemoveTVWatchlist = MockRemoveTVWatchList();
     provider = TVDetailNotifier(
       getTVDetail: mockGetTVDetail,
       getTVRecommendations: mockGetTVRecommendations,

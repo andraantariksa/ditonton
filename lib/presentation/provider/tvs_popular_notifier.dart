@@ -31,7 +31,7 @@ class TVsPopularNotifier extends ChangeNotifier {
       },
       (tvsData) {
         _tvs = tvsData;
-        _state = RequestState.Loaded;
+        _state = RequestState.Success;
         notifyListeners();
       },
     );

@@ -61,7 +61,7 @@ void main() {
     // act
     await notifier.fetchPopularMovies();
     // assert
-    expect(notifier.state, RequestState.Loaded);
+    expect(notifier.state, RequestState.Success);
     expect(notifier.movies, tMovieList);
     expect(listenerCallCount, 2);
   });

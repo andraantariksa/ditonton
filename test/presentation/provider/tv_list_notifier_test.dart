@@ -81,7 +81,7 @@ void main() {
       // act
       await provider.fetchOnTheAirTVs();
       // assert
-      expect(provider.nowPlayingState, RequestState.Loaded);
+      expect(provider.nowPlayingState, RequestState.Success);
       expect(provider.nowPlayingMovies, tTVList);
       expect(listenerCallCount, 2);
     });
@@ -119,7 +119,7 @@ void main() {
       // act
       await provider.fetchPopularTVs();
       // assert
-      expect(provider.popularTVsState, RequestState.Loaded);
+      expect(provider.popularTVsState, RequestState.Success);
       expect(provider.popularTVs, tTVList);
       expect(listenerCallCount, 2);
     });
@@ -156,7 +156,7 @@ void main() {
       // act
       await provider.fetchTopRatedTVs();
       // assert
-      expect(provider.topRatedTVsState, RequestState.Loaded);
+      expect(provider.topRatedTVsState, RequestState.Success);
       expect(provider.topRatedTVs, tTVList);
       expect(listenerCallCount, 2);
     });

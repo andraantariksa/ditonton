@@ -4,7 +4,7 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_recommendations.dart';
-import 'package:ditonton/domain/usecases/get_tv_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/is_tv_watchlisted.dart';
 import 'package:ditonton/domain/usecases/remove_tv_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_tv_watchlist.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
@@ -18,9 +18,9 @@ import 'tv_detail_notifier_test.mocks.dart';
 @GenerateMocks([
   GetTVDetail,
   GetTVRecommendations,
-  GetTVWatchListStatus,
-  SaveTVWatchlist,
-  RemoveTVWatchlist,
+  IsTVWatchListed,
+  SaveTVWatchList,
+  RemoveTVWatchList,
 ])
 void main() {
   late TVDetailNotifier provider;
@@ -100,7 +100,7 @@ void main() {
       // act
       await provider.fetchTVDetail(tId);
       // assert
-      expect(provider.tvState, RequestState.Loaded);
+      expect(provider.tvState, RequestState.Success);
       expect(provider.tv, testTVDetail);
       expect(listenerCallCount, 3);
     });
@@ -112,7 +112,7 @@ void main() {
       // act
       await provider.fetchTVDetail(tId);
       // assert
-      expect(provider.tvState, RequestState.Loaded);
+      expect(provider.tvState, RequestState.Success);
       expect(provider.tvRecommendations, tTVs);
     });
   });
@@ -135,7 +135,7 @@ void main() {
       // act
       await provider.fetchTVDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.Success);
       expect(provider.tvRecommendations, tTVs);
     });
 

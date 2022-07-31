@@ -1,10 +1,10 @@
 import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/presentation/pages/home_tv_page.dart';
-import 'package:ditonton/presentation/pages/movie_search_page.dart';
-import 'package:ditonton/presentation/pages/movie_watchlist_page.dart';
-import 'package:ditonton/presentation/pages/tv_search_page.dart';
-import 'package:ditonton/presentation/pages/tv_watchlist_page.dart';
+import 'package:ditonton/presentation/pages/home_movie/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/home_tv/home_tv_page.dart';
+import 'package:ditonton/presentation/pages/movie_search/movie_search_page.dart';
+import 'package:ditonton/presentation/pages/movie_watchlist/movie_watchlist_page.dart';
+import 'package:ditonton/presentation/pages/tv_search/tv_search_page.dart';
+import 'package:ditonton/presentation/pages/tv_watchlist/tv_watchlist_page.dart';
 import 'package:ditonton/presentation/widgets/plain_page_route.dart';
 import 'package:flutter/material.dart';
 

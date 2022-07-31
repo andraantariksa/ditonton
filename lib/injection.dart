@@ -12,7 +12,6 @@ import 'package:ditonton/domain/repositories/tv_repository.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_movie_watchlist.dart';
-import 'package:ditonton/domain/usecases/get_movie_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_on_the_air_tvs.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
@@ -22,7 +21,8 @@ import 'package:ditonton/domain/usecases/get_top_rated_tvs.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_tv_watchlist.dart';
-import 'package:ditonton/domain/usecases/get_tv_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/is_movie_watchlisted.dart';
+import 'package:ditonton/domain/usecases/is_tv_watchlisted.dart';
 import 'package:ditonton/domain/usecases/remove_movie_watchlist.dart';
 import 'package:ditonton/domain/usecases/remove_tv_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_movie_watchlist.dart';
@@ -49,6 +49,13 @@ import 'package:http/io_client.dart';
 final locator = GetIt.instance;
 
 Future<void> init() async {
+  // external
+  final networkContext = await securedNetworkContext();
+  final client = HttpClient(context: networkContext);
+  client.badCertificateCallback =
+      (X509Certificate cert, String host, int port) => false;
+  locator.registerLazySingleton<http.Client>(() => IOClient(client));
+
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
@@ -60,12 +67,12 @@ Future<void> init() async {
   locator.registerFactory(
     () => TVListNotifier(
       getOnTheAirTVs: locator(),
-          getPopularTVs: locator(),
-          getTopRatedTVs: locator(),
-        ),
+      getPopularTVs: locator(),
+      getTopRatedTVs: locator(),
+    ),
   );
   locator.registerFactory(
-        () => MovieDetailNotifier(
+    () => MovieDetailNotifier(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
       getWatchListStatus: locator(),
@@ -74,7 +81,7 @@ Future<void> init() async {
     ),
   );
   locator.registerFactory(
-        () => TVDetailNotifier(
+    () => TVDetailNotifier(
       getTVDetail: locator(),
       getTVRecommendations: locator(),
       getTVWatchListStatus: locator(),
@@ -83,42 +90,42 @@ Future<void> init() async {
     ),
   );
   locator.registerFactory(
-        () => TVSearchNotifier(
+    () => TVSearchNotifier(
       searchTVs: locator(),
     ),
   );
   locator.registerFactory(
-        () => MovieSearchNotifier(
+    () => MovieSearchNotifier(
       searchMovies: locator(),
     ),
   );
   locator.registerFactory(
-        () => TVsPopularNotifier(
+    () => TVsPopularNotifier(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => MoviesPopularNotifier(
+    () => MoviesPopularNotifier(
       locator(),
     ),
   );
   locator.registerFactory(
-        () => TVsTopRatedNotifier(
+    () => TVsTopRatedNotifier(
       getTopRatedTVs: locator(),
     ),
   );
   locator.registerFactory(
-        () => MoviesTopRatedNotifier(
+    () => MoviesTopRatedNotifier(
       getTopRatedMovies: locator(),
     ),
   );
   locator.registerFactory(
-        () => TVWatchlistNotifier(
+    () => TVWatchlistNotifier(
       getWatchlistTVs: locator(),
     ),
   );
   locator.registerFactory(
-        () => MovieWatchlistNotifier(
+    () => MovieWatchlistNotifier(
       getWatchlistMovies: locator(),
     ),
   );
@@ -130,10 +137,10 @@ Future<void> init() async {
   locator.registerLazySingleton(() => GetMovieDetail(locator()));
   locator.registerLazySingleton(() => GetMovieRecommendations(locator()));
   locator.registerLazySingleton(() => SearchMovies(locator()));
-  locator.registerLazySingleton(() => GetMovieWatchListStatus(locator()));
-  locator.registerLazySingleton(() => SaveMovieWatchlist(locator()));
-  locator.registerLazySingleton(() => RemoveMovieWatchlist(locator()));
-  locator.registerLazySingleton(() => GetMovieWatchlist(locator()));
+  locator.registerLazySingleton(() => IsMovieWatchListed(locator()));
+  locator.registerLazySingleton(() => SaveMovieWatchList(locator()));
+  locator.registerLazySingleton(() => RemoveMovieWatchList(locator()));
+  locator.registerLazySingleton(() => GetMovieWatchList(locator()));
 
   locator.registerLazySingleton(() => GetOnTheAirTVs(locator()));
   locator.registerLazySingleton(() => GetPopularTVs(locator()));
@@ -141,20 +148,20 @@ Future<void> init() async {
   locator.registerLazySingleton(() => GetTVDetail(locator()));
   locator.registerLazySingleton(() => GetTVRecommendations(locator()));
   locator.registerLazySingleton(() => SearchTVs(locator()));
-  locator.registerLazySingleton(() => GetTVWatchListStatus(locator()));
-  locator.registerLazySingleton(() => SaveTVWatchlist(locator()));
-  locator.registerLazySingleton(() => RemoveTVWatchlist(locator()));
+  locator.registerLazySingleton(() => IsTVWatchListed(locator()));
+  locator.registerLazySingleton(() => SaveTVWatchList(locator()));
+  locator.registerLazySingleton(() => RemoveTVWatchList(locator()));
   locator.registerLazySingleton(() => GetTVWatchlist(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
-        () => MovieRepositoryImpl(
+    () => MovieRepositoryImpl(
       remoteDataSource: locator(),
       localDataSource: locator(),
     ),
   );
   locator.registerLazySingleton<TVRepository>(
-        () => TVRepositoryImpl(
+    () => TVRepositoryImpl(
       remoteDataSource: locator(),
       localDataSource: locator(),
     ),
@@ -172,9 +179,4 @@ Future<void> init() async {
 
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
-
-  // external
-  var networkContext = await securedNetworkContext();
-  locator.registerLazySingleton<http.Client>(
-      () => IOClient(HttpClient(context: networkContext)));
 }

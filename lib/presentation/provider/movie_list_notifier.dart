@@ -1,6 +1,6 @@
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class MovieListNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (moviesData) {
-        _nowPlayingState = RequestState.Loaded;
+        _nowPlayingState = RequestState.Success;
         _nowPlayingMovies = moviesData;
         notifyListeners();
       },
@@ -68,7 +68,7 @@ class MovieListNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (moviesData) {
-        _popularMoviesState = RequestState.Loaded;
+        _popularMoviesState = RequestState.Success;
         _popularMovies = moviesData;
         notifyListeners();
       },
@@ -87,7 +87,7 @@ class MovieListNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (moviesData) {
-        _topRatedMoviesState = RequestState.Loaded;
+        _topRatedMoviesState = RequestState.Success;
         _topRatedMovies = moviesData;
         notifyListeners();
       },

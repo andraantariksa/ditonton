@@ -31,7 +31,7 @@ class MoviesTopRatedNotifier extends ChangeNotifier {
       },
       (moviesData) {
         _movies = moviesData;
-        _state = RequestState.Loaded;
+        _state = RequestState.Success;
         notifyListeners();
       },
     );

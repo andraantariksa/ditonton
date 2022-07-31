@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
 import 'movie_watchlist_notifier_test.mocks.dart';
 
-@GenerateMocks([GetMovieWatchlist])
+@GenerateMocks([GetMovieWatchList])
 void main() {
   late MovieWatchlistNotifier provider;
   late MockGetMovieWatchlist mockGetWatchlistMovies;
@@ -33,7 +33,7 @@ void main() {
     // act
     await provider.fetchWatchlistMovies();
     // assert
-    expect(provider.watchlistState, RequestState.Loaded);
+    expect(provider.watchlistState, RequestState.Success);
     expect(provider.watchlistMovies, [testWatchlistMovie]);
     expect(listenerCallCount, 2);
   });

@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
-import 'package:ditonton/domain/usecases/get_movie_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/is_movie_watchlisted.dart';
 import 'package:ditonton/domain/usecases/remove_movie_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_movie_watchlist.dart';
 import 'package:flutter/foundation.dart';
@@ -15,9 +15,9 @@ class MovieDetailNotifier extends ChangeNotifier {
 
   final GetMovieDetail getMovieDetail;
   final GetMovieRecommendations getMovieRecommendations;
-  final GetMovieWatchListStatus getWatchListStatus;
-  final SaveMovieWatchlist saveWatchlist;
-  final RemoveMovieWatchlist removeWatchlist;
+  final IsMovieWatchListed getWatchListStatus;
+  final SaveMovieWatchList saveWatchlist;
+  final RemoveMovieWatchList removeWatchlist;
 
   MovieDetailNotifier({
     required this.getMovieDetail,
@@ -66,11 +66,11 @@ class MovieDetailNotifier extends ChangeNotifier {
             _message = failure.message;
           },
           (movies) {
-            _recommendationState = RequestState.Loaded;
+            _recommendationState = RequestState.Success;
             _movieRecommendations = movies;
           },
         );
-        _movieState = RequestState.Loaded;
+        _movieState = RequestState.Success;
         notifyListeners();
       },
     );

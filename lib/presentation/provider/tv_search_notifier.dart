@@ -30,7 +30,7 @@ class TVSearchNotifier extends ChangeNotifier {
       },
       (data) {
         _searchResult = data;
-        _state = RequestState.Loaded;
+        _state = RequestState.Success;
         notifyListeners();
       },
     );

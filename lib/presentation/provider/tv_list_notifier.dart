@@ -49,7 +49,7 @@ class TVListNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tvsData) {
-        _nowPlayingState = RequestState.Loaded;
+        _nowPlayingState = RequestState.Success;
         _nowPlayingTVs = tvsData;
         notifyListeners();
       },
@@ -68,7 +68,7 @@ class TVListNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tvsData) {
-        _popularTVsState = RequestState.Loaded;
+        _popularTVsState = RequestState.Success;
         _popularTVs = tvsData;
         notifyListeners();
       },
@@ -87,7 +87,7 @@ class TVListNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tvsData) {
-        _topRatedTVsState = RequestState.Loaded;
+        _topRatedTVsState = RequestState.Success;
         _topRatedTVs = tvsData;
         notifyListeners();
       },

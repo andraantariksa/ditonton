@@ -63,7 +63,7 @@ void main() {
       // act
       await provider.fetchMovieSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.Success);
       expect(provider.searchResult, tMovieList);
       expect(listenerCallCount, 2);
     });

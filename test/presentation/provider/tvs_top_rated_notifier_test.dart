@@ -57,7 +57,7 @@ void main() {
     // act
     await notifier.fetchTopRatedTVs();
     // assert
-    expect(notifier.state, RequestState.Loaded);
+    expect(notifier.state, RequestState.Success);
     expect(notifier.tvs, tTVList);
     expect(listenerCallCount, 2);
   });

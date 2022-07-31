@@ -3,10 +3,10 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 
-class GetMovieWatchlist {
+class GetMovieWatchList {
   final MovieRepository _repository;
 
-  GetMovieWatchlist(this._repository);
+  GetMovieWatchList(this._repository);
 
   Future<Either<Failure, List<Movie>>> execute() {
     return _repository.getWatchlist();

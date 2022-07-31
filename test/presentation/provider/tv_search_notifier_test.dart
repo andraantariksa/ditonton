@@ -61,7 +61,7 @@ void main() {
       // act
       await provider.fetchTVSearch(tQuery);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.Success);
       expect(provider.searchResult, tTVList);
       expect(listenerCallCount, 2);
     });

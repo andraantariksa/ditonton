@@ -94,8 +94,8 @@ class TVRepositoryImpl implements TVRepository {
   @override
   Future<Either<Failure, String>> saveWatchlist(TVDetail movie) async {
     try {
-      final result =
-          await localDataSource.insertWatchlist(TVOverviewTable.fromEntity(movie));
+      final result = await localDataSource
+          .insertWatchlist(TVOverviewTable.fromEntity(movie));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -107,8 +107,8 @@ class TVRepositoryImpl implements TVRepository {
   @override
   Future<Either<Failure, String>> removeWatchlist(TVDetail movie) async {
     try {
-      final result =
-          await localDataSource.removeWatchlist(TVOverviewTable.fromEntity(movie));
+      final result = await localDataSource
+          .removeWatchlist(TVOverviewTable.fromEntity(movie));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));

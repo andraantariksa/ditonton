@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_recommendations.dart';
-import 'package:ditonton/domain/usecases/get_tv_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/is_tv_watchlisted.dart';
 import 'package:ditonton/domain/usecases/remove_tv_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_tv_watchlist.dart';
 import 'package:flutter/foundation.dart';
@@ -15,9 +15,9 @@ class TVDetailNotifier extends ChangeNotifier {
 
   final GetTVDetail getTVDetail;
   final GetTVRecommendations getTVRecommendations;
-  final GetTVWatchListStatus getTVWatchListStatus;
-  final SaveTVWatchlist saveTVWatchlist;
-  final RemoveTVWatchlist removeTVWatchlist;
+  final IsTVWatchListed getTVWatchListStatus;
+  final SaveTVWatchList saveTVWatchlist;
+  final RemoveTVWatchList removeTVWatchlist;
 
   TVDetailNotifier({
     required this.getTVDetail,
@@ -66,11 +66,11 @@ class TVDetailNotifier extends ChangeNotifier {
             _message = failure.message;
           },
           (tvs) {
-            _recommendationState = RequestState.Loaded;
+            _recommendationState = RequestState.Success;
             _tvRecommendations = tvs;
           },
         );
-        _tvState = RequestState.Loaded;
+        _tvState = RequestState.Success;
         notifyListeners();
       },
     );

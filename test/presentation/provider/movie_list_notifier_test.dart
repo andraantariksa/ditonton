@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
-import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -83,7 +83,7 @@ void main() {
       // act
       await provider.fetchNowPlayingMovies();
       // assert
-      expect(provider.nowPlayingState, RequestState.Loaded);
+      expect(provider.nowPlayingState, RequestState.Success);
       expect(provider.nowPlayingMovies, tMovieList);
       expect(listenerCallCount, 2);
     });
@@ -121,7 +121,7 @@ void main() {
       // act
       await provider.fetchPopularMovies();
       // assert
-      expect(provider.popularMoviesState, RequestState.Loaded);
+      expect(provider.popularMoviesState, RequestState.Success);
       expect(provider.popularMovies, tMovieList);
       expect(listenerCallCount, 2);
     });
@@ -158,7 +158,7 @@ void main() {
       // act
       await provider.fetchTopRatedMovies();
       // assert
-      expect(provider.topRatedMoviesState, RequestState.Loaded);
+      expect(provider.topRatedMoviesState, RequestState.Success);
       expect(provider.topRatedMovies, tMovieList);
       expect(listenerCallCount, 2);
     });

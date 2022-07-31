@@ -33,7 +33,7 @@ void main() {
     // act
     await provider.fetchWatchlistTVs();
     // assert
-    expect(provider.watchlistState, RequestState.Loaded);
+    expect(provider.watchlistState, RequestState.Success);
     expect(provider.watchlistTVs, [testWatchlistTV]);
     expect(listenerCallCount, 2);
   });

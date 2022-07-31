@@ -4,7 +4,7 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
-import 'package:ditonton/domain/usecases/get_movie_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/is_movie_watchlisted.dart';
 import 'package:ditonton/domain/usecases/remove_movie_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_movie_watchlist.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
@@ -18,9 +18,9 @@ import 'movie_detail_notifier_test.mocks.dart';
 @GenerateMocks([
   GetMovieDetail,
   GetMovieRecommendations,
-  GetMovieWatchListStatus,
-  SaveMovieWatchlist,
-  RemoveMovieWatchlist,
+  IsMovieWatchListed,
+  SaveMovieWatchList,
+  RemoveMovieWatchList,
 ])
 void main() {
   late MovieDetailNotifier provider;
@@ -102,7 +102,7 @@ void main() {
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.movieState, RequestState.Loaded);
+      expect(provider.movieState, RequestState.Success);
       expect(provider.movie, testMovieDetail);
       expect(listenerCallCount, 3);
     });
@@ -114,7 +114,7 @@ void main() {
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.movieState, RequestState.Loaded);
+      expect(provider.movieState, RequestState.Success);
       expect(provider.movieRecommendations, tMovies);
     });
   });
@@ -137,7 +137,7 @@ void main() {
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.Success);
       expect(provider.movieRecommendations, tMovies);
     });
 

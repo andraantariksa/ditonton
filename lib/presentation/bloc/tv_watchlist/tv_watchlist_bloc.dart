@@ -5,7 +5,7 @@ import 'package:ditonton/presentation/bloc/tv_watchlist/tv_watchlist_state.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TVWatchListBloc extends Bloc<TVWatchListEvent, TVWatchListState> {
-  final GetTVWatchlist getTVWatchlist;
+  final GetTVWatchList getTVWatchlist;
 
   TVWatchListBloc({required this.getTVWatchlist})
       : super(TVWatchListState(tvs: Resource.loading())) {

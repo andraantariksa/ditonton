@@ -13,15 +13,15 @@ class TVDetailBloc extends Bloc<TVDetailEvent, TVDetailState> {
   final GetTVDetail getTVDetail;
   final GetTVRecommendations getTVRecommendations;
   final IsTVWatchListed isTVWatchListed;
-  final SaveTVWatchList saveTVWatchlist;
-  final RemoveTVWatchList removeTVWatchlist;
+  final SaveTVWatchList saveTVWatchList;
+  final RemoveTVWatchList removeTVWatchList;
 
   TVDetailBloc(
       {required this.getTVDetail,
       required this.getTVRecommendations,
       required this.isTVWatchListed,
-      required this.saveTVWatchlist,
-      required this.removeTVWatchlist})
+      required this.saveTVWatchList,
+      required this.removeTVWatchList})
       : super(TVDetailState(
             detail: Resource.loading(),
             isWatchListed: Resource.loading(),
@@ -81,14 +81,16 @@ class TVDetailBloc extends Bloc<TVDetailEvent, TVDetailState> {
 
   Future<String> addWatchList(TVDetail tvDetail) async {
     String message = "";
-    (await saveTVWatchlist.execute(tvDetail)).fold((err) => message = err.message, (res) => message = res);
+    (await saveTVWatchList.execute(tvDetail))
+        .fold((err) => message = err.message, (res) => message = res);
     add(FetchIsTVWatchListed(id: tvDetail.id));
     return message;
   }
 
   Future<String> removeWatchList(TVDetail tvDetail) async {
     String message = "";
-    (await removeTVWatchlist.execute(tvDetail)).fold((err) => message = err.message, (res) => message = res);
+    (await removeTVWatchList.execute(tvDetail))
+        .fold((err) => message = err.message, (res) => message = res);
     add(FetchIsTVWatchListed(id: tvDetail.id));
     return message;
   }

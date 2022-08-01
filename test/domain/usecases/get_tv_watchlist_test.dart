@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetTVWatchlist usecase;
+  late GetTVWatchList usecase;
   late MockTVRepository mockTVRepository;
 
   setUp(() {
     mockTVRepository = MockTVRepository();
-    usecase = GetTVWatchlist(mockTVRepository);
+    usecase = GetTVWatchList(mockTVRepository);
   });
 
   test('should get TVs watchlist from the repository', () async {

@@ -94,8 +94,8 @@ Future<void> init() async {
         getTVDetail: locator(),
         getTVRecommendations: locator(),
         isTVWatchListed: locator(),
-        removeTVWatchlist: locator(),
-        saveTVWatchlist: locator()),
+        removeTVWatchList: locator(),
+        saveTVWatchList: locator()),
   );
   locator.registerFactory(
     () => TVSearchBloc(searchTVs: locator()),
@@ -125,7 +125,7 @@ Future<void> init() async {
   locator.registerLazySingleton(() => IsTVWatchListed(locator()));
   locator.registerLazySingleton(() => SaveTVWatchList(locator()));
   locator.registerLazySingleton(() => RemoveTVWatchList(locator()));
-  locator.registerLazySingleton(() => GetTVWatchlist(locator()));
+  locator.registerLazySingleton(() => GetTVWatchList(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
